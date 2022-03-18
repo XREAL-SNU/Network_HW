@@ -30,12 +30,16 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("PlayerManager/JoinedRoom");
-        var cam = PhotonNetwork.Instantiate("PhotonPrefab/PlayerFollowCamera", Vector3.zero, Quaternion.identity);
-        var player = PhotonNetwork.Instantiate("PhotonPrefab/CharacterPrefab", Vector3.zero, Quaternion.identity);
+        // instantiate camera, locally
+        var prefab = (GameObject)Resources.Load("PhotonPrefab/PlayerFollowCamera");
+        var cam = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        cam.name = "PlayerFollowCamera";
 
+        // instantiate player and link
+        var player = PhotonNetwork.Instantiate("PhotonPrefab/CharacterPrefab", Vector3.zero, Quaternion.identity);
         if (cam != null && player != null) cam.GetComponent<CinemachineVirtualCamera>().Follow = player.transform.Find("FollowTarget");
     }
+
     public override void OnCreatedRoom()
     {
         Debug.Log("PlayerManager/CreatedRoom");

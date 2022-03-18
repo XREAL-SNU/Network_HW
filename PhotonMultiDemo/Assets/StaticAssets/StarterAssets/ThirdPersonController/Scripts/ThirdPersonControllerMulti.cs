@@ -51,7 +51,20 @@ namespace StarterAssets
 			}
 		}
 
-        private void OnDisable()
+		protected sealed override void LateUpdate()
+		{
+			if (PhotonNetwork.OfflineMode)
+			{
+				base.LateUpdate();
+				return;
+			}
+			if (_view.IsMine)
+			{
+				base.LateUpdate();
+			}
+		}
+
+		private void OnDisable()
         {
 			//Destroy(this.gameObject);
         }

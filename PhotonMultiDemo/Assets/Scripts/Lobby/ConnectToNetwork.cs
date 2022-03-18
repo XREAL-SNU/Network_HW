@@ -64,10 +64,12 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
             Hashtable roomProps = PhotonNetwork.CurrentRoom.CustomProperties;
             if (!roomProps.ContainsKey("Level"))
             {
-                throw new System.IndexOutOfRangeException("Nonexistent custom property");
+                roomProps.Add("Level", 1);
             }
-            Debug.Log("Level before: " + roomProps["Level"]);
-            roomProps["Level"] = (int)roomProps["Level"] + 1;
+            else
+            {
+                roomProps["Level"] = (int)roomProps["Level"] + 1;
+            }
             PhotonNetwork.CurrentRoom.SetCustomProperties(roomProps);
         }
     }

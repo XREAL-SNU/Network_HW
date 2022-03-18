@@ -29,13 +29,7 @@ public class ConnectionUIScript : UIScene
     public const string GAME_LEVEL_KEY = "Level";
     public void OnClick_JoinRandom(PointerEventData data)
     {
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 6;
-        Hashtable ht = new Hashtable { { GAME_LEVEL_KEY, 1 } };
-
-        roomOptions.CustomRoomPropertiesForLobby = new string[] { GAME_LEVEL_KEY };
-        roomOptions.CustomRoomProperties = new Hashtable { { GAME_LEVEL_KEY, 1 } };
-        PhotonNetwork.CreateRoom(null, roomOptions);
+        PhotonNetwork.JoinRandomOrCreateRoom();
 
         UIManager.UI.CloseSceneUI();
     }

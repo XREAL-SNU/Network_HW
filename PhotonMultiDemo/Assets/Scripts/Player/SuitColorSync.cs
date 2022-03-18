@@ -32,13 +32,17 @@ public class SuitColorSync : MonoBehaviourPunCallbacks
     void Start()
     {
         PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable { { SUIT_COLOR_KEY, ColorEnum.Blue } });
-        block = new MaterialPropertyBlock();
-        suitRenderer = transform.Find("Space_Suit/Tpose_/Man_Suit/Body").GetComponent<Renderer>();
     }
 
     public override void OnPlayerPropertiesUpdate(Player player, Hashtable updatedProps)
     {
+        if (block == null) block = new MaterialPropertyBlock();
         block.SetColor("_Color", GetColor((ColorEnum)updatedProps[SUIT_COLOR_KEY]));
+
+        // get the renderer of the player
+        GameObject playerGo = (GameObject)player.TagObject;
+        suitRenderer = playerGo.transform.Find("Space_Suit/Tpose_/Man_Suit/Body").GetComponent<Renderer>();
+
         suitRenderer.SetPropertyBlock(block);
     }
 
