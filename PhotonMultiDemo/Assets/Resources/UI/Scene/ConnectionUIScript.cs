@@ -10,6 +10,9 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class ConnectionUIScript : UIScene
 {
+
+    bool syncScenes = true;
+
     void Start()
     {
         Init();
@@ -24,13 +27,15 @@ public class ConnectionUIScript : UIScene
     {
         Bind<Image>(typeof(Images));
         GetUIComponent<Image>((int)Images.JoinBtn).gameObject.BindEvent(OnClick_JoinRandom);
+        Debug.Log("UI init");
     }
 
     public const string GAME_LEVEL_KEY = "Level";
     public void OnClick_JoinRandom(PointerEventData data)
     {
-        PhotonNetwork.JoinRandomOrCreateRoom();
+        Debug.Log("OnClick_JoinRandom");
 
+        PhotonNetwork.JoinRandomOrCreateRoom();
         UIManager.UI.CloseSceneUI();
     }
 }

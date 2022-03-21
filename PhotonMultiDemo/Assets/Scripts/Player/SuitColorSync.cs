@@ -1,3 +1,4 @@
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
@@ -20,7 +21,7 @@ public class SuitColorSync : MonoBehaviourPunCallbacks
             case ColorEnum.Red:
                 return Color.red;
             case ColorEnum.Green:
-                return Color.green;
+                return Color.green; 
             case ColorEnum.Blue:
                 return Color.blue;
         }
@@ -31,13 +32,38 @@ public class SuitColorSync : MonoBehaviourPunCallbacks
     Renderer suitRenderer;
     void Start()
     {
-        PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable { { SUIT_COLOR_KEY, ColorEnum.Blue } });
+        Debug.Log("Start on SuitColorSync by " + gameObject.GetPhotonView().Owner.NickName);
+
+        if (PhotonNetwork.OfflineMode || !PhotonNetwork.InRoom) return;
+        InitializeSuitColor();
     }
 
+    void InitializeSuitColor()
+    {
+        // set my property on spawn
+        if (gameObject.GetPhotonView().AmOwner) SetColorProperty(ColorEnum.Blue);
+
+        // retrieve other player's properties
+        else
+        {
+            Player owner = gameObject.GetPhotonView().Owner;
+            Hashtable ownerProps = owner.CustomProperties;
+            if (ownerProps.ContainsKey(SUIT_COLOR_KEY)) SetSuitColor(owner, (ColorEnum)ownerProps[SUIT_COLOR_KEY]);
+        }
+    }
     public override void OnPlayerPropertiesUpdate(Player player, Hashtable updatedProps)
     {
+        Debug.Log($"on update: player {player.NickName}'s props  {updatedProps.ToString()}");
+        if (updatedProps.ContainsKey(SUIT_COLOR_KEY))
+        {
+            SetSuitColor(player, (ColorEnum)updatedProps[SUIT_COLOR_KEY]);
+        }
+    }
+
+    public void SetSuitColor(Player player, ColorEnum col)
+    {
         if (block == null) block = new MaterialPropertyBlock();
-        block.SetColor("_Color", GetColor((ColorEnum)updatedProps[SUIT_COLOR_KEY]));
+        block.SetColor("_Color", GetColor(col));
 
         // get the renderer of the player
         GameObject playerGo = (GameObject)player.TagObject;
