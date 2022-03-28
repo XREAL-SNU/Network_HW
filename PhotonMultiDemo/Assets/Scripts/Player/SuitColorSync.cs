@@ -53,7 +53,6 @@ public class SuitColorSync : MonoBehaviourPunCallbacks
     }
     public override void OnPlayerPropertiesUpdate(Player player, Hashtable updatedProps)
     {
-        Debug.Log($"on update: player {player.NickName}'s props  {updatedProps.ToString()}");
         if (updatedProps.ContainsKey(SUIT_COLOR_KEY))
         {
             SetSuitColor(player, (ColorEnum)updatedProps[SUIT_COLOR_KEY]);

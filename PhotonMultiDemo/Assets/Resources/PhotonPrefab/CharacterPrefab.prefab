@@ -2364,6 +2364,7 @@ GameObject:
   - component: {fileID: 5478846460915643131}
   - component: {fileID: 4321812567328104445}
   - component: {fileID: 7705398522009932871}
+  - component: {fileID: 8884868742946107915}
   m_Layer: 9
   m_Name: CharacterPrefab
   m_TagString: Player
@@ -2602,6 +2603,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89dad762030105047b3adb234f86ab26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8884868742946107915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142847262815404090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b91d0d981df17418f0e77e6fa99193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowFaceTime: 3
+  FaceTextures: []
+  DefaultFaceIndex: 11
 --- !u!1 &4252053785439907878
 GameObject:
   m_ObjectHideFlags: 0

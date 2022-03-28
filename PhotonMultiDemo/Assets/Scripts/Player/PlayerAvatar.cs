@@ -27,5 +27,7 @@ public class PlayerAvatar : MonoBehaviour, IPunInstantiateMagicCallback
         var suitRenderer = transform.Find("Space_Suit/Tpose_/Man_Suit/Body").GetComponent<Renderer>();
         // make a copy of the material
         suitRenderer.materials[0] = new Material(suitRenderer.materials[0]);
+
+
     }
 }
