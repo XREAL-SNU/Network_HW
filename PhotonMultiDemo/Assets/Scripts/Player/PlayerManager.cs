@@ -95,15 +95,21 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     }
 
 
+    public Action<Player> PlayerInitializedActions = null;
+
+    public GameObject LocalPlayerGo
+    {
+        get => (GameObject)PhotonNetwork.LocalPlayer.TagObject;
+    }
     void InitializePlayer()
     {
         Debug.Log("INITIALIZE PLAYER");
         // instantiate camera, locally
         var spawnPoint = GameObject.Find("SpawnPoint").transform;
 
-        var prefab = (GameObject)Resources.Load("PhotonPrefab/PlayerFollowCamera");
+        var prefab = (GameObject)Resources.Load("PhotonPrefab/ThirdPersonCam");
         var cam = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-        cam.name = "PlayerFollowCamera";
+        cam.name = "ThirdPersonCam";
 
         Vector3 spawnPosition = Vector3.zero;
         // instantiate player and link
@@ -113,7 +119,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         }
         var player = PhotonNetwork.Instantiate("PhotonPrefab/CharacterPrefab", spawnPosition, Quaternion.identity);
 
-        if (cam != null && player != null) cam.GetComponent<CinemachineVirtualCamera>().Follow = player.transform.Find("FollowTarget");
+
+        // callback
+        if (PlayerInitializedActions != null) PlayerInitializedActions(PhotonNetwork.LocalPlayer);
     }
 
 

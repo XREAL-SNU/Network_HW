@@ -50,7 +50,7 @@ namespace StarterAssets
 				base.Update();
 			}
 		}
-
+		/*
 		protected sealed override void LateUpdate()
 		{
 			if (PhotonNetwork.OfflineMode)
@@ -63,6 +63,7 @@ namespace StarterAssets
 				base.LateUpdate();
 			}
 		}
+		*/
 
 		private void OnDisable()
         {

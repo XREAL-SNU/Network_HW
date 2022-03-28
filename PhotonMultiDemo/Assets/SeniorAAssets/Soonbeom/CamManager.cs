@@ -21,6 +21,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Photon.Realtime;
 
 public class CamManager : MonoBehaviour
 {
@@ -35,9 +36,32 @@ public class CamManager : MonoBehaviour
     private bool _useMouseToRotateTp;
     private bool _isCurrentFp;
 
+    private void OnEnable()
+    {
+        PlayerManager.Instance.PlayerInitializedActions -= OnPlayerInitialized;
+        PlayerManager.Instance.PlayerInitializedActions += OnPlayerInitialized;
+    }
+    private void OnDisable()
+    {
+        PlayerManager.Instance.PlayerInitializedActions -= OnPlayerInitialized;
+    }
+
+
     private void Start() {
+        
+        // InitializeCamera();
+    }
+
+
+    void OnPlayerInitialized(Player networkedPlayer)
+    {
+        InitializeCamera();
+    }
+
+    void InitializeCamera()
+    {
         // 카메라가 쫓아다닐 플레이어를 설정합니다.
-        player = GameObject.FindWithTag("Player");
+        player = PlayerManager.Instance.LocalPlayerGo;
 
         // 1인칭 카메라와 3인칭카메라를 초기화시키고 카메라의 타겟을 설정합니다.
         firstPersonCamObj = player.transform.Find("FirstPersonCam").gameObject;
@@ -51,7 +75,13 @@ public class CamManager : MonoBehaviour
         firstPersonCam.gameObject.SetActive(false);
         thirdPersonCam.gameObject.SetActive(true);
         _isCurrentFp = false;
+
+        // freeze look
+        _useMouseToRotateTp = false;
+        thirdPersonCam.m_XAxis.m_MaxSpeed = 0;
+        thirdPersonCam.m_YAxis.m_MaxSpeed = 0;
     }
+
     private void Update(){
         // 키보드 G 키를 누르면 1인칭과 3인칭을 전환합니다.
         if(Input.GetKeyDown(KeyCode.G)){
