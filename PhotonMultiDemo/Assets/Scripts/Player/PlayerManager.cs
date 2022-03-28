@@ -38,6 +38,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         if (GUI.Button(new Rect(0.75f * Screen.width, 0.85f * Screen.height, 200, 50), "Leave"))
             PhotonNetwork.LeaveRoom();
     }
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("PlayerManager/OnSceneLoaded: " + scene.name);
@@ -49,11 +50,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     }
 
 
-    string SceneNameToLoad = "SampleScene";
+    public string SceneNameToLoad = "SampleScene";
 
     public override void OnJoinedRoom()
     {
         Debug.Log("PlayerManager/JoinedRoom as " + PhotonNetwork.LocalPlayer.NickName);
+        Debug.Log("PlayerManager/Room properties :" + PhotonNetwork.CurrentRoom.ToString());
         // do not call this in createRoom.
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
@@ -71,20 +73,25 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         Debug.Log("PlayerManager/CreatedRoom");
     }
 
+    // Leave Room Callbacks
+    public Action JoinedLobbyActions = null;
+
     public override void OnLeftRoom()
     {
         Debug.Log("PlayerManager/LeftRoom");
-        SceneManager.LoadScene((int)SceneEnum.LauncherScene);
     }
 
     public override void OnConnectedToMaster()
     {
         Debug.Log("PlayerManager/Connected to master");
+        PhotonNetwork.JoinLobby();
     }
 
     public override void OnJoinedLobby()
     {
         Debug.Log("PlayerManager/Joined Lobby");
+        // if actions are specified, invoke, else, return to main.
+        if (JoinedLobbyActions != null) JoinedLobbyActions();
     }
 
 

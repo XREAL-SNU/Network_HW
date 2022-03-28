@@ -79,9 +79,9 @@ public class SuitColorSync : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.R)) SetColorProperty(ColorEnum.Red);
-        if (Input.GetKey(KeyCode.G)) SetColorProperty(ColorEnum.Green);
-        if (Input.GetKey(KeyCode.B)) SetColorProperty(ColorEnum.Blue);
+        if (Input.GetKeyDown(KeyCode.R)) SetColorProperty(ColorEnum.Red);
+        if (Input.GetKeyDown(KeyCode.G)) SetColorProperty(ColorEnum.Green);
+        if (Input.GetKeyDown(KeyCode.B)) SetColorProperty(ColorEnum.Blue);
     }
 
 }

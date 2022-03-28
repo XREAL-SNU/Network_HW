@@ -15,6 +15,7 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
 
     public static ConnectToNetwork Instance = null;
 
+
     private void Awake()
     {
         // singleton
@@ -33,17 +34,13 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
     private void Start()
     {
         UIManager.UI.ShowSceneUI<ConnectionUIScript>("ConnectionUI");
-        Debug.Log("Connecting to Photon...", this);
+        Debug.Log("<<<< WELCOME : NETWORK HW BUILD >>>>>", this);
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.NickName = "Player" + Random.Range(1,100);
         PhotonNetwork.GameVersion = "1.0.0";
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log($"Connected to Master");
-    }
 
     public override void OnDisconnected(DisconnectCause cause)
     {
