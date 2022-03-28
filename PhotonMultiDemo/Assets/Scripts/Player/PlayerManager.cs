@@ -97,14 +97,22 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     void InitializePlayer()
     {
-        Debug.Log("INITIALIZE PLAUYER");
+        Debug.Log("INITIALIZE PLAYER");
         // instantiate camera, locally
+        var spawnPoint = GameObject.Find("SpawnPoint").transform;
+
         var prefab = (GameObject)Resources.Load("PhotonPrefab/PlayerFollowCamera");
         var cam = Instantiate(prefab, Vector3.zero, Quaternion.identity);
         cam.name = "PlayerFollowCamera";
 
+        Vector3 spawnPosition = Vector3.zero;
         // instantiate player and link
-        var player = PhotonNetwork.Instantiate("PhotonPrefab/CharacterPrefab", Vector3.zero, Quaternion.identity);
+        if(spawnPoint != null)
+        {
+            spawnPosition = spawnPoint.position;
+        }
+        var player = PhotonNetwork.Instantiate("PhotonPrefab/CharacterPrefab", spawnPosition, Quaternion.identity);
+
         if (cam != null && player != null) cam.GetComponent<CinemachineVirtualCamera>().Follow = player.transform.Find("FollowTarget");
     }
 
