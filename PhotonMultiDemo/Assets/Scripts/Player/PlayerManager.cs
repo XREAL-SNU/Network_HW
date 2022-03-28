@@ -121,6 +121,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
 
         // callback
+        Debug.Log("Calling PlayerInitializationActions");
         if (PlayerInitializedActions != null) PlayerInitializedActions(PhotonNetwork.LocalPlayer);
     }
 

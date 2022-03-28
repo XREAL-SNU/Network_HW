@@ -55,6 +55,7 @@ public class CamManager : MonoBehaviour
 
     void OnPlayerInitialized(Player networkedPlayer)
     {
+        Debug.Log("CamManager/Entering OnPlayerInitialized");
         InitializeCamera();
     }
 

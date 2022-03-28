@@ -1,3 +1,4 @@
+using Cinemachine;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +12,14 @@ public class PlayerAvatar : MonoBehaviour, IPunInstantiateMagicCallback
         info.Sender.TagObject = this.gameObject;
         Debug.Log($"Player {info.Sender.NickName}'s Avatar is instantiated/t={info.SentServerTime}");
         InitializeMaterials();
+
+        // remove first person cam if not localplayer.
+        if (!GetComponent<PhotonView>().IsMine) {
+            var fpcam = GetComponentInChildren<CinemachineVirtualCamera>();
+            Destroy(fpcam);
+        }
+
+        Debug.Log("Exitig PhotonNetwork/OnPhotonNetworkCallback");
     }
 
     void InitializeMaterials()
