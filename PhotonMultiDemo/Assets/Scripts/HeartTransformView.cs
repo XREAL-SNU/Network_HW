@@ -59,6 +59,15 @@ namespace Photon.Pun
                     tr.position = Vector3.MoveTowards(tr.position, this.m_NetworkPosition, this.m_Distance * Time.deltaTime * PhotonNetwork.SerializationRate);
                 }
             }
+            
+        }
+
+        public void HeartDestroyed()
+        {
+            if(!isDestroyed)
+            {
+                isDestroyed = true;
+            }
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -103,10 +112,8 @@ namespace Photon.Pun
 
                     if(isDestroyed)
                     {
-                        Destroy(this.gameObject); //isDestroyed가 true로 전송되는 순간 게임 오브젝트를 파괴하고 끝
-                        return;
+                        Destroy(this.gameObject, 3.0f); //isDestroyed가 true로 전송되는 순간 게임 오브젝트를 파괴하고 끝
                     }
-                    //isDestroyed가 멀쩡한 경우
                     if (m_firstTake)
                     {
                         if (m_UseLocal)

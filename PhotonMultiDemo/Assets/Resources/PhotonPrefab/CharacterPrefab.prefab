@@ -2588,6 +2588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyTime: 2.7
+  heartTransformView: {fileID: 0}
 --- !u!1 &4252053785439907878
 GameObject:
   m_ObjectHideFlags: 0

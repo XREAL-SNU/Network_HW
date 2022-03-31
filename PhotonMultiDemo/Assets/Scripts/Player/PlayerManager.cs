@@ -41,11 +41,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("PlayerManager/OnSceneLoaded: " + scene.name);
-
         if(PhotonNetwork.OfflineMode || PhotonNetwork.InRoom)
-        {
+        {   
+            Debug.Log("새 Player 생성!!");
             InitializePlayer();
         }
+        
     }
 
 

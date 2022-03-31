@@ -158,6 +158,4 @@ namespace XReal.XTown.UI {
             while (_popupStack.Count > 0) ClosePopupUI();
         }
     }
-
-    
 }

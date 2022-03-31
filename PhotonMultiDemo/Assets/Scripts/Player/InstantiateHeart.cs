@@ -9,6 +9,7 @@ public class InstantiateHeart : MonoBehaviourPun
     private GameObject _player;
     private Vector3[] wayPoints;
     private Vector3 wayPoint1, wayPoint2, wayPoint3;
+    public HeartTransformView heartTransformView;
     bool exist = false;
     // Start is called before the first frame update
     void awake()
@@ -43,9 +44,9 @@ public class InstantiateHeart : MonoBehaviourPun
 
                 wayPoints = new Vector3[2];
 
-                wayPoint1 = new Vector3(_player.transform.position.x+0.25f, _player.transform.position.y+1.7f, 
+                wayPoint1 = new Vector3(_player.transform.position.x+0.250f, _player.transform.position.y+1.7f, 
                 _player.transform.position.z-0.25f);
-                wayPoint2 = new Vector3(_player.transform.position.x+0.24f, _player.transform.position.y+2f, 
+                wayPoint2 = new Vector3(_player.transform.position.x+0.255f, _player.transform.position.y+2f, 
                 _player.transform.position.z-0.25f);
                 
 
@@ -53,12 +54,11 @@ public class InstantiateHeart : MonoBehaviourPun
 
                 wayPoints.SetValue(wayPoint1, 0);
                 wayPoints.SetValue(wayPoint2, 1);
-                
-                
-                
                 Heart.transform.DOPath(wayPoints, DestroyTime).SetEase(Ease.OutQuad);
 
+                heartTransformView = Heart.GetComponent<HeartTransformView>();
                 Destroy(Heart, 3f);
+                heartTransformView.HeartDestroyed();
                 exist=false;
             }
         }
