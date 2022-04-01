@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 {
     // singleton, dont destroy on load
     public static PlayerManager Instance = null;
-
+    public GameObject PlayerGameObject;
     private void Awake()
     {
         // singleton
@@ -91,7 +91,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     void InitializePlayer()
     {
-        Debug.Log("INITIALIZE PLAUYER");
+        Debug.Log("INITIALIZE PLAYER");
         // instantiate camera, locally
         var prefab = (GameObject)Resources.Load("PhotonPrefab/PlayerFollowCamera");
         var cam = Instantiate(prefab, Vector3.zero, Quaternion.identity);

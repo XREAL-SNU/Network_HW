@@ -19,8 +19,6 @@ namespace Photon.Pun
         private Vector3 m_Direction;
         private Vector3 m_NetworkPosition;
         private Vector3 m_StoredPosition;
-        private bool isDestroyed = false;
-
         public bool m_SynchronizePosition = true;
         public bool m_UseLocal;
 
@@ -62,14 +60,6 @@ namespace Photon.Pun
             
         }
 
-        public void HeartDestroyed()
-        {
-            if(!isDestroyed)
-            {
-                isDestroyed = true;
-            }
-        }
-
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
             var tr = transform;
@@ -85,7 +75,7 @@ namespace Photon.Pun
                         this.m_StoredPosition = tr.localPosition;
                         stream.SendNext(tr.localPosition);
                         stream.SendNext(this.m_Direction);
-                        stream.SendNext(this.isDestroyed);
+                        
                     }
                     else
                     {
@@ -93,7 +83,7 @@ namespace Photon.Pun
                         this.m_StoredPosition = tr.position;
                         stream.SendNext(tr.position);
                         stream.SendNext(this.m_Direction);
-                        stream.SendNext(this.isDestroyed);
+                        
                     }
                 }
 
@@ -108,12 +98,7 @@ namespace Photon.Pun
                 {
                     this.m_NetworkPosition = (Vector3)stream.ReceiveNext();
                     this.m_Direction = (Vector3)stream.ReceiveNext();
-                    this.isDestroyed = (bool)stream.ReceiveNext();
-
-                    if(isDestroyed)
-                    {
-                        Destroy(this.gameObject, 3.0f); //isDestroyed가 true로 전송되는 순간 게임 오브젝트를 파괴하고 끝
-                    }
+                    
                     if (m_firstTake)
                     {
                         if (m_UseLocal)

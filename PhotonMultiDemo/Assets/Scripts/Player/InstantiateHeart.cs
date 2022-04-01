@@ -1,21 +1,21 @@
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using DG.Tweening;
-
+using System.Threading;
+using System.Threading.Tasks;
 public class InstantiateHeart : MonoBehaviourPun
 {
     [SerializeField]
     public float DestroyTime = 2.7f;
     private GameObject _player;
-    private Vector3[] wayPoints;
-    private Vector3 wayPoint1, wayPoint2, wayPoint3;
+    private Vector3[] wayPoints = new Vector3[2];
+    private Vector3 wayPoint1, wayPoint2 = new Vector3(0, 0, 0);
+    private Player player;
     public HeartTransformView heartTransformView;
+    
     bool exist = false;
     // Start is called before the first frame update
-    void awake()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -35,32 +35,27 @@ public class InstantiateHeart : MonoBehaviourPun
         {
             if(!exist)
             {   
-                exist=true;
                 Vector3 mainCamRotation = Camera.main.transform.rotation.eulerAngles;
                 Vector3 forwardRotation = new Vector3(0, mainCamRotation.y, 0);
-                _player = GameObject.FindWithTag("Player");
+                _player = (GameObject)PhotonNetwork.LocalPlayer.TagObject;
                 GameObject Heart = PhotonNetwork.Instantiate("PhotonViewHeart", new Vector3(_player.transform.position.x, _player.transform.position.y+1.3f, 
                 _player.transform.position.z), Quaternion.Euler(270, 0, 0), 0);
-
-                wayPoints = new Vector3[2];
-
-                wayPoint1 = new Vector3(_player.transform.position.x+0.250f, _player.transform.position.y+1.7f, 
-                _player.transform.position.z-0.25f);
-                wayPoint2 = new Vector3(_player.transform.position.x+0.255f, _player.transform.position.y+2f, 
-                _player.transform.position.z-0.25f);
                 
-
-
-
+                wayPoint1.Set(_player.transform.position.x+0.250f, _player.transform.position.y+1.7f, _player.transform.position.z-0.25f);
+                wayPoint2.Set(_player.transform.position.x+0.255f, _player.transform.position.y+2f,_player.transform.position.z-0.25f);
+                
                 wayPoints.SetValue(wayPoint1, 0);
                 wayPoints.SetValue(wayPoint2, 1);
-                Heart.transform.DOPath(wayPoints, DestroyTime).SetEase(Ease.OutQuad);
 
-                heartTransformView = Heart.GetComponent<HeartTransformView>();
-                Destroy(Heart, 3f);
-                heartTransformView.HeartDestroyed();
-                exist=false;
+                Heart.transform.DOPath(wayPoints, DestroyTime).SetEase(Ease.OutQuad);
+                DestroyHeart(Heart);
             }
         }
+    }
+
+    static async void DestroyHeart(GameObject heart)
+    {
+        await Task.Delay(3000);
+        PhotonNetwork.Destroy(heart);
     }
 }

@@ -9,6 +9,7 @@ public class PlayerAvatar : MonoBehaviour, IPunInstantiateMagicCallback
     {
         // store this gameobject as this player's charater in Player.TagObject
         info.Sender.TagObject = this.gameObject;
+        
         Debug.Log($"Player {info.Sender.NickName}'s Avatar is instantiated/t={info.SentServerTime}");
         InitializeMaterials();
     }

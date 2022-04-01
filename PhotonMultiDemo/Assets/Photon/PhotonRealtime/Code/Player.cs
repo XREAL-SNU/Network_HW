@@ -138,7 +138,6 @@ namespace Photon.Realtime
         /// <remarks>Example: Set a player's character as Tag by assigning the GameObject on Instantiate.</remarks>
         public object TagObject;
 
-
         /// <summary>
         /// Creates a player instance.
         /// To extend and replace this Player, override LoadBalancingPeer.CreatePlayer().
