@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8800817022602906977}
   - component: {fileID: 8800817022602906979}
   m_Layer: 5
-  m_Name: JoinBtn
+  m_Name: RoomJoinBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f210c1417092a8546ae0346d6285d79b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b482018e85addbb4b930ff62a5b75842, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -100,9 +100,9 @@ GameObject:
   - component: {fileID: 8800817022958514918}
   - component: {fileID: 8800817022958514917}
   - component: {fileID: 8800817022958514916}
-  - component: {fileID: 8800817022958514912}
+  - component: {fileID: 8354410470190850683}
   m_Layer: 5
-  m_Name: ConnectionUI
+  m_Name: RoomConnectionUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8800817022958514912
+--- !u!114 &8354410470190850683
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8800817022958514939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d10a69fd131d42c4da98fd44d3f37299, type: 3}
+  m_Script: {fileID: 11500000, guid: fae85bba51e453341ac27ad67096d629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8800817024282986474
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 8800817024282986453}
   - component: {fileID: 8800817024282986452}
   m_Layer: 5
-  m_Name: ConnectionPanel
+  m_Name: RoomConnectionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

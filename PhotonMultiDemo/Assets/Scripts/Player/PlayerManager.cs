@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using XReal.XTown.UI;
 
 public enum SceneEnum
 {
@@ -54,6 +55,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("PlayerManager/JoinedRoom as " + PhotonNetwork.LocalPlayer.NickName);
+        Room currentRoom = PhotonNetwork.CurrentRoom;
+        Debug.Log("Current Room : " + currentRoom.Name);
         // do not call this in createRoom.
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
@@ -85,6 +88,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("PlayerManager/Joined Lobby");
+        TypedLobby currentLobby = PhotonNetwork.CurrentLobby;
+        Debug.Log("Current Lobby : " + currentLobby.Name);
+        UIManager.UI.ShowSceneUI<RoomConnectionUIScript>("RoomConnectionUI");
     }
 
 

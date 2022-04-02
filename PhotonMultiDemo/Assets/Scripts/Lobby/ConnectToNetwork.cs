@@ -32,7 +32,7 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        UIManager.UI.ShowSceneUI<ConnectionUIScript>("ConnectionUI");
+        UIManager.UI.ShowSceneUI<LobbyConnectionUIScript>("LobbyConnectionUI");
         Debug.Log("Connecting to Photon...", this);
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.NickName = "Player" + Random.Range(1,100);

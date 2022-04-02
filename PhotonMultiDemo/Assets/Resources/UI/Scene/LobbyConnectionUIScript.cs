@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using XReal.XTown.UI;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-public class ConnectionUIScript : UIScene
+public class LobbyConnectionUIScript : UIScene
 {
 
     bool syncScenes = true;
@@ -20,22 +20,21 @@ public class ConnectionUIScript : UIScene
 
     enum Images
     {
-        JoinBtn
+        LobbyJoinBtn
     }
 
     public override void Init()
     {
         Bind<Image>(typeof(Images));
-        GetUIComponent<Image>((int)Images.JoinBtn).gameObject.BindEvent(OnClick_JoinRandom);
+        GetUIComponent<Image>((int)Images.LobbyJoinBtn).gameObject.BindEvent(OnClick_JoinLobby);
         Debug.Log("UI init");
     }
 
     public const string GAME_LEVEL_KEY = "Level";
-    public void OnClick_JoinRandom(PointerEventData data)
+    public void OnClick_JoinLobby(PointerEventData data)
     {
-        Debug.Log("OnClick_JoinRandom");
-
-        PhotonNetwork.JoinRandomOrCreateRoom();
+        Debug.Log("OnClick_JoinLobby");
+        PhotonNetwork.JoinLobby();
         UIManager.UI.CloseSceneUI();
     }
 }
