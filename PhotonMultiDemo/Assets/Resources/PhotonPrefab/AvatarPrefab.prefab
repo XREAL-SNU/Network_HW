@@ -2356,15 +2356,9 @@ GameObject:
   - component: {fileID: 3617948570369366656}
   - component: {fileID: 7265895933261529338}
   - component: {fileID: 6963951202599841695}
-  - component: {fileID: 785595142864034658}
-  - component: {fileID: 4716362168694986599}
-  - component: {fileID: 3773915873309736936}
-  - component: {fileID: 5478846460915643131}
-  - component: {fileID: 4321812567328104445}
-  - component: {fileID: 7705398522009932871}
-  - component: {fileID: 8884868742946107915}
+  - component: {fileID: 6087173040130176784}
   m_Layer: 9
-  m_Name: CharacterPrefab
+  m_Name: AvatarPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2424,7 +2418,7 @@ CharacterController:
   m_SkinWidth: 0.087
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.7, z: 0}
---- !u!114 &785595142864034658
+--- !u!114 &6087173040130176784
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2433,127 +2427,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4142847262815404090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Script: {fileID: 11500000, guid: ef66e3a89f9574c5f957348a37999851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 2
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 4716362168694986599}
-  - {fileID: 5478846460915643131}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &4716362168694986599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4142847262815404090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 1
-  m_UseLocal: 1
---- !u!114 &3773915873309736936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4142847262815404090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cac8104e7fc6b1642942600e90a9be3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveSpeed: 40
-  RunSpeed: 60
+  MoveSpeed: 20
+  RunSpeed: 40
   JumpHeight: 2
   GroundLayers:
     serializedVersion: 2
     m_Bits: 256
---- !u!114 &5478846460915643131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4142847262815404090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 1
-    Name: Jump
-  - Type: 1
-    SynchronizeType: 0
-    Name: Speed
-  - Type: 4
-    SynchronizeType: 0
-    Name: Grounded
-  - Type: 4
-    SynchronizeType: 0
-    Name: FreeFall
-  - Type: 1
-    SynchronizeType: 0
-    Name: MotionSpeed
-  m_SynchronizeLayers:
-  - SynchronizeType: 1
-    LayerIndex: 0
---- !u!114 &4321812567328104445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4142847262815404090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce1b678bb51261f45983bc4aa310f989, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7705398522009932871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4142847262815404090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89dad762030105047b3adb234f86ab26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8884868742946107915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4142847262815404090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03b91d0d981df17418f0e77e6fa99193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowFaceTime: 3
-  FaceTextures: []
-  DefaultFaceIndex: 11
 --- !u!1 &4252053785439907878
 GameObject:
   m_ObjectHideFlags: 0
