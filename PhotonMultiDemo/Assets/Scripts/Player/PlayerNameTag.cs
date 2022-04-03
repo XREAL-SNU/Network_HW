@@ -6,15 +6,15 @@ using TMPro;
 
 public class PlayerNameTag : MonoBehaviourPun
 {
-    [SerializeField] private TextMeshProUGUI nameText;
+    private TextMeshPro nameText;
     void Start()
     {
+        nameText = gameObject.GetComponent<TextMeshPro>();
         if (photonView.IsMine)
         {
             nameText.gameObject.SetActive(false);
             return;
         }
-
         SetName();
     }
 

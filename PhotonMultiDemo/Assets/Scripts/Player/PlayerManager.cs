@@ -89,7 +89,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("PlayerManager/Joined Lobby");
         TypedLobby currentLobby = PhotonNetwork.CurrentLobby;
-        Debug.Log("Current Lobby : " + currentLobby.Name);
+        Debug.Log("Current Lobby : " + currentLobby.IsDefault);
         UIManager.UI.ShowSceneUI<RoomConnectionUIScript>("RoomConnectionUI");
     }
 
