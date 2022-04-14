@@ -70,7 +70,7 @@ public class CamManager : MonoBehaviour
         thirdPersonCamObj = GameObject.Find("ThirdPersonCam");
         thirdPersonCam = thirdPersonCamObj.GetComponent<CinemachineFreeLook>();
         thirdPersonCam.Follow = player.transform;
-        thirdPersonCam.LookAt = player.transform;
+        thirdPersonCam.LookAt = player.transform.Find("FollowTarget");
 
         // 처음에는 3인칭카메라로 시작할 것이기 때문에 1인칭카메라를 비활성화시켜줍니다.
         firstPersonCam.gameObject.SetActive(false);

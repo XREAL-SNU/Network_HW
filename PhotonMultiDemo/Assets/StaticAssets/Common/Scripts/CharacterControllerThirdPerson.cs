@@ -22,6 +22,7 @@ public class CharacterControllerThirdPerson : MonoBehaviour
     protected Vector2 _input;
     protected bool _isRun;
     protected bool _isJump;
+    protected bool _isPunch;
     protected CharacterController _controller;
     protected GameObject _mainCamera;
 
@@ -43,14 +44,34 @@ public class CharacterControllerThirdPerson : MonoBehaviour
 
         _isRun = Input.GetKey(KeyCode.LeftShift);
         _isJump = Input.GetKey(KeyCode.Space);
+        _isPunch = Input.GetKey(KeyCode.Z);
 
         //Roll();
         Jump();
         GroundCheck();
         Move();
 
-        //Punch();
+        Punch();
     }
+
+    void Punch()
+    {
+        if (_input == Vector2.zero && _grounded && _isPunch)
+        {
+            //_animator.applyRootMotion = false;
+            _animator.SetBool("Punch", true);
+        }
+        else
+        {
+            _animator.SetBool("Punch", false);
+        }
+
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Punch"))
+        {
+            _animator.applyRootMotion = false;
+        }
+    }
+
 
     private void Move()
     {
@@ -132,28 +153,5 @@ public class CharacterControllerThirdPerson : MonoBehaviour
         _grounded = Physics.CheckSphere(transform.position, _groundCheckRadius, GroundLayers, QueryTriggerInteraction.Ignore);
         _animator.SetBool("Grounded", _grounded);
     }
-    /*
-    void Roll()
-    {
-        if (Input.GetKeyDown(KeyCode.Z) && !_isJump && !_isRoll && !_isPunch)
-        {
-            _isRoll = true;
-            _animator.SetTrigger("Roll");
 
-            Invoke("ResetTrigger", 1f);
-        }
-    }
-
-    void Punch()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !_isJump && !_isRoll && !_isPunch)
-        {
-            _isRoll = true;
-            _animator.SetTrigger("Punch");
-
-            Invoke("ResetTrigger", 0.3f);
-        }
-    }
-
-    */
 }
