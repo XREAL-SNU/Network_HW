@@ -11,8 +11,6 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class ConnectionUIScript : UIScene
 {
 
-    const string SCENE_NAME_KEY = "SceneName";
-    public string DefaultSceneName = "SampleScene";
 
     void Start()
     {
@@ -35,31 +33,9 @@ public class ConnectionUIScript : UIScene
     public void OnClick_JoinRandom(PointerEventData data)
     {
         Debug.Log("OnClick_JoinRandom");
-
-        LoadFirstRoom();
         UIManager.UI.CloseSceneUI();
+        UIManager.UI.ShowPopupUI<EmoticonUI>();
     }
 
-    public void LoadFirstRoom()
-    {
-        // must bein lobby to execute
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.CustomRoomPropertiesForLobby = new string[] { SCENE_NAME_KEY };
-        roomOptions.CustomRoomProperties = GetFilter(SCENE_NAME_KEY, DefaultSceneName);
-        Debug.Log($"JoinRoomTeleport/ do we have correct room options? ({roomOptions.CustomRoomProperties.ToString()})");
 
-        PlayerManager.Instance.SceneNameToLoad = DefaultSceneName;
-
-        PhotonNetwork.JoinRandomOrCreateRoom(
-            expectedCustomRoomProperties: GetFilter(SCENE_NAME_KEY, DefaultSceneName),
-            roomOptions: roomOptions
-        );
-    }
-
-    public Hashtable GetFilter(string key, object value)
-    {
-        Hashtable ht = new Hashtable();
-        ht.Add(key, value);
-        return ht;
-    }
 }

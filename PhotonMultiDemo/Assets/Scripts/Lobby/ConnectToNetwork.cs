@@ -13,6 +13,10 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class ConnectToNetwork : MonoBehaviourPunCallbacks
 {
 
+    const string SCENE_NAME_KEY = "SceneName";
+    const string DefaultSceneName = "SampleScene";
+
+
     public static ConnectToNetwork Instance = null;
 
 
@@ -71,5 +75,26 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
         }
     }
 
-    
+    public void LoadFirstRoom()
+    {
+        // must bein lobby to execute
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.CustomRoomPropertiesForLobby = new string[] { SCENE_NAME_KEY };
+        roomOptions.CustomRoomProperties = GetFilter(SCENE_NAME_KEY, DefaultSceneName);
+        Debug.Log($"JoinRoomTeleport/ do we have correct room options? ({roomOptions.CustomRoomProperties.ToString()})");
+
+        PlayerManager.Instance.SceneNameToLoad = DefaultSceneName;
+
+        PhotonNetwork.JoinRandomOrCreateRoom(
+            expectedCustomRoomProperties: GetFilter(SCENE_NAME_KEY, DefaultSceneName),
+            roomOptions: roomOptions
+        );
+    }
+
+    public Hashtable GetFilter(string key, object value)
+    {
+        Hashtable ht = new Hashtable();
+        ht.Add(key, value);
+        return ht;
+    }
 }
