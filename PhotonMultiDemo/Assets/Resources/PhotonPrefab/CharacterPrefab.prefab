@@ -2321,6 +2321,7 @@ GameObject:
   - component: {fileID: 5478846460915643131}
   - component: {fileID: 4321812567328104445}
   - component: {fileID: 7705398522009932871}
+  - component: {fileID: 5578411559885412114}
   m_Layer: 9
   m_Name: CharacterPrefab
   m_TagString: Player
@@ -2558,6 +2559,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89dad762030105047b3adb234f86ab26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5578411559885412114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142847262815404090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b91d0d981df17418f0e77e6fa99193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AvatarFace: {fileID: 0}
+  ShowFaceTime: 1
+  FaceTextures:
+  - {fileID: 2800000, guid: b0e7a1b90261b174399ee01f34d0e2ae, type: 3}
+  - {fileID: 2800000, guid: a65541ab26d2fc34aa3c4879cb65cee9, type: 3}
+  - {fileID: 2800000, guid: 866b3739598e6804aae2d644bbe6e029, type: 3}
+  - {fileID: 2800000, guid: 2b0f03bfd72646748b5281ef6eb4651c, type: 3}
+  - {fileID: 2800000, guid: ea25cf4fc3eb92b4aa7857a06e403745, type: 3}
+  - {fileID: 2800000, guid: cf23d0efcd682e64ab38f93848af3b89, type: 3}
+  - {fileID: 2800000, guid: a26a7ad0cc1bf044c9ac92542ef5adb9, type: 3}
+  - {fileID: 2800000, guid: af2435fbd404d774db43937b17d5d6ed, type: 3}
+  - {fileID: 2800000, guid: 198ceb57531988a49bbb18f267e65d62, type: 3}
+  - {fileID: 2800000, guid: b1441f66f848e9e4ea9a5a34d7e3edb4, type: 3}
+  - {fileID: 2800000, guid: e48ad108bd2839a4db8ef4d3a2cc4b8b, type: 3}
+  - {fileID: 2800000, guid: 8b1ca17f7ccd5c2458aa6392a8506bcb, type: 3}
+  - {fileID: 2800000, guid: 55b13679f93361b40b8afde9789354ce, type: 3}
+  - {fileID: 2800000, guid: 6ea19d00b15f9bb44ae4f653ccf6c486, type: 3}
+  - {fileID: 2800000, guid: 1e8bd84885b75ef4a9f674064fc92629, type: 3}
+  - {fileID: 2800000, guid: 6744b69c8eb231042bd11633d12f876a, type: 3}
+  - {fileID: 2800000, guid: 66960a81362abd041b3397ea336408f7, type: 3}
+  - {fileID: 2800000, guid: 1aaa62876b871d944b67bd4211487ff8, type: 3}
+  - {fileID: 2800000, guid: b98ff694eca89a345b95d048eb2958e7, type: 3}
+  - {fileID: 2800000, guid: eed6fe436d867414a82705133a293fb8, type: 3}
+  - {fileID: 2800000, guid: 107f2345534786b41812c53fecf79a19, type: 3}
+  DefaultFaceIndex: 1
 --- !u!1 &4252053785439907878
 GameObject:
   m_ObjectHideFlags: 0

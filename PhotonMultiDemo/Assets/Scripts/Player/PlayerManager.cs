@@ -2,10 +2,10 @@ using Cinemachine;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using XReal.XTown.Persistance;
 
 public enum SceneEnum
 {
@@ -16,13 +16,19 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 {
     // singleton, dont destroy on load
     public static PlayerManager Instance = null;
-
+    public PlayerData Data;
+    protected const string _storageFileName = "player";
+    protected string _dataPath;
     private void Awake()
     {
         // singleton
         if (Instance == null)
         {
             Instance = this;
+            Data = new PlayerData();
+
+            InitializePlayerData();
+
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else if (Instance != this)
@@ -37,8 +43,48 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     {
         if (GUI.Button(new Rect(0.75f * Screen.width, 0.85f * Screen.height, 200, 50), "Leave"))
             PhotonNetwork.LeaveRoom();
+
+        GUI.Label(new Rect(10, 10, 600, 20), _dataPath);
     }
 
+    void InitializePlayerData()
+    {
+        _dataPath = Application.dataPath;
+        Storage storage = new Storage();
+        object obj = storage.LoadData(_storageFileName);
+        if (obj is null)
+        {
+            Data.myFaces = new List<int> { 11, 17, 2, 7 };
+            storage.SaveData((object)Data, _storageFileName);
+            Debug.Log("Creating new player data file");
+            return;
+        }
+        else
+        {
+            Data = (PlayerData)obj;
+        }
+    }
+    public void SaveAllPlayerData()
+    {
+        Storage storage = new Storage();
+        storage.SaveData(Data, _storageFileName);
+        
+        // following lines are debugging data
+        object obj = storage.LoadData(_storageFileName);
+        if (obj is null)
+        {
+            storage.SaveData((object)Data, _storageFileName);
+            Debug.Log("Creating new player data file");
+            return;
+        }
+        else
+        {
+            Data = (PlayerData)obj;
+            Debug.Log("PlayerManager/SaveALL");
+
+            Debug.Log(Data.myFaces.ToStringFull());
+        }
+    }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("PlayerManager/OnSceneLoaded: " + scene.name);
@@ -97,7 +143,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     void InitializePlayer()
     {
-        Debug.Log("INITIALIZE PLAUYER");
+        Debug.Log("INITIALIZE PLAYER");
         // instantiate camera, locally
         var prefab = (GameObject)Resources.Load("PhotonPrefab/PlayerFollowCamera");
         var cam = Instantiate(prefab, Vector3.zero, Quaternion.identity);
