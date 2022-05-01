@@ -55,6 +55,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         if (obj is null)
         {
             Data.myFaces = new List<int> { 11, 17, 2, 7 };
+            Data.suitColor = SuitColorSync.ColorEnum.Blue;
             storage.SaveData((object)Data, _storageFileName);
             Debug.Log("Creating new player data file");
             return;
