@@ -2,6 +2,7 @@
 using Photon.Pun;
 using System.Collections;
 using UnityEngine;
+
 public class HeartTransformView : MonoBehaviourPun, IPunObservable
 {
     private float m_Distance;
@@ -14,7 +15,7 @@ public class HeartTransformView : MonoBehaviourPun, IPunObservable
     [SerializeField]
     private bool m_SynchronizePosition = true;
     [SerializeField]
-    private bool m_UseLocal;
+    private bool m_UseLocal = true;
 
     bool m_firstTake = false;
         

@@ -94,19 +94,31 @@ namespace StarterAssets
 
 		protected virtual void Awake()
 		{
-			// get a reference to our main camera
-			if (_mainCamera == null)
-			{
-				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-			}
+
 		}
 
 		protected virtual void Start()
 		{
+			// setup action maps
+			var actions = Resources.Load<InputActionAsset>("Presets/StarterActions");
+			var input = GetComponent<PlayerInput>();
+			input.actions = actions;
+			actions.Enable();
+
+			// animator  settings
 			_hasAnimator = TryGetComponent(out _animator);
+			_animator.applyRootMotion = true;
+			_animator.avatar = Resources.Load<Avatar>("Presets/CartoonSpaceSuitAvatar");
+			_animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Presets/StarterAssetsThirdPersonAnimator");
+
+			
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
-
+			
+			if (_mainCamera == null)
+			{
+				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+			}
 			AssignAnimationIDs();
 
 			// reset our timeouts on start

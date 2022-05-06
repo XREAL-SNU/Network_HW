@@ -1,4 +1,5 @@
 using Cinemachine;
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
@@ -28,7 +29,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             Data = new PlayerData();
 
             InitializePlayerData();
-
+            PlayerHierarchy = (GameObject)Resources.Load("PhotonPrefab/CharacterPrefab");
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else if (Instance != this)
@@ -39,13 +40,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void OnGUI()
-    {
-        if (GUI.Button(new Rect(0.75f * Screen.width, 0.85f * Screen.height, 200, 50), "Leave"))
-            PhotonNetwork.LeaveRoom();
-
-        GUI.Label(new Rect(10, 10, 600, 20), _dataPath);
-    }
 
     void InitializePlayerData()
     {
@@ -151,9 +145,83 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         cam.name = "PlayerFollowCamera";
 
         // instantiate player and link
-        var player = PhotonNetwork.Instantiate("PhotonPrefab/CharacterPrefab", Vector3.zero, Quaternion.identity);
+        // var player = PhotonNetwork.Instantiate("PhotonPrefab/CharacterPrefab", Vector3.zero, Quaternion.identity);
+        var player = SpawnPlayer();
         if (cam != null && player != null) cam.GetComponent<CinemachineVirtualCamera>().Follow = player.transform.Find("FollowTarget");
     }
 
+    const byte CustomManualInstantiationEventCode = 17;
+    public GameObject PlayerHierarchy; 
 
+    public GameObject SpawnPlayer()
+    {
+        string bundleName = "horror-handless";
+        string assetName = "AvatarSpaceSuit_Handless";
+        GameObject PlayerPrefab = AssetBundleLoader.LoadBundleAsset<GameObject>(bundleName, assetName);
+        GameObject player = Instantiate(PlayerPrefab);
+        
+        // local setup. especially, copying photonview is important
+        foreach (Component comp in PlayerHierarchy.GetComponents<Component>())
+        {
+            System.Type type = comp.GetType();
+            Debug.Log("copying " + type.ToString());
+            comp.PasteComponent(player);
+        }
+        PhotonView photonView = player.GetComponent<PhotonView>();
+
+        if (PhotonNetwork.AllocateViewID(photonView))
+        {
+            object[] data = new object[]
+            {
+            player.transform.position, player.transform.rotation, photonView.ViewID,
+            bundleName, assetName
+            };
+
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+            {
+                Receivers = ReceiverGroup.Others,
+                // must cache spawn event so i get spawned to players later joining room
+                CachingOption = EventCaching.AddToRoomCache
+            };
+
+            SendOptions sendOptions = new SendOptions
+            {
+                Reliability = true
+            };
+            photonView.Owner.TagObject = player;
+
+
+            // raise instantiation event
+            PhotonNetwork.RaiseEvent(CustomManualInstantiationEventCode, data, raiseEventOptions, sendOptions);
+            return player;
+        }
+        else
+        {
+            Debug.LogError("Failed to allocate a ViewId.");
+
+            Destroy(player);
+            return null;
+        }
+    }
+    public void OnEvent(EventData photonEvent)
+    {
+        if (photonEvent.Code == CustomManualInstantiationEventCode)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+            Debug.Log($"Instantiation: load {(string)data[3]}/{(string)data[4]} view{(int)data[2]}");
+            GameObject PlayerPrefab = AssetBundleLoader.LoadBundleAsset<GameObject>((string)data[3], (string)data[4]);
+            GameObject player = (GameObject)Instantiate(PlayerPrefab, (Vector3)data[0], (Quaternion)data[1]);
+            // copy components
+            foreach (Component comp in PlayerHierarchy.GetComponents<Component>())
+            {
+                System.Type type = comp.GetType();
+                Debug.Log("copying " + type.ToString());
+                comp.PasteComponent(player);
+            }
+            PhotonView photonView = player.GetComponent<PhotonView>();
+            photonView.ViewID = (int)data[2];
+            // tag object
+            photonView.Owner.TagObject = player;
+        }
+    }
 }

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Materials
+  m_EditorClassIdentifier: 
+  m_GroupName: Materials
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 9a5262b373fe54f42aba17977f2a2a85
+  m_SerializeEntries:
+  - m_GUID: 65baaf70449238d4d9bf3b9621059a05
+    m_Address: Assets/StaticAssets/CartoonSpaceSuit/Models/Materials/Body_Base_Color.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - materials
+  - m_GUID: 32144381849429f4f9ee5f0162060d16
+    m_Address: Assets/StaticAssets/CartoonSpaceSuit/Models/Materials/Body_Base_Color_Blue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - materials
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 35b184c840b32fb4ab97d2be6fd2f3bf, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: bb8cdbb15408d434ea9ccdc0db604dd0, type: 2}
+    - {fileID: 11400000, guid: 86d1a47ade6accf4e9d2f658ef44bf7c, type: 2}
