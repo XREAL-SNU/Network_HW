@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 1085506468}
   - component: {fileID: 1085506467}
   - component: {fileID: 1085506466}
-  - component: {fileID: 1085506470}
   m_Layer: 0
   m_Name: '@Managers'
   m_TagString: Untagged
@@ -201,18 +200,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1085506470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1085506465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce601f04f9a2eb04cb331f43e2b74224, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1148229294
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +369,8 @@ GameObject:
   - component: {fileID: 1595020588}
   - component: {fileID: 1595020587}
   - component: {fileID: 1595020586}
-  - component: {fileID: 1595020585}
+  - component: {fileID: 1595020592}
+  - component: {fileID: 1595020591}
   m_Layer: 0
   m_Name: ColorTarget
   m_TagString: Untagged
@@ -390,19 +378,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1595020585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1595020584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e16e7880759ab94f943abbf71e4ade6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mycol: 0
 --- !u!65 &1595020586
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -479,6 +454,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1595020591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595020584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c9e99ff9f079da4ca08e769766067e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1595020592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595020584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa9d845a245f918459e5e660b5a20058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AssemblyURL: https://aws-codestar-ap-northeast-2-500483309477.s3.ap-northeast-2.amazonaws.com/XTownAssets/RuntimeAssemblies/SampleLibrary.dll
 --- !u!1 &1748700537
 GameObject:
   m_ObjectHideFlags: 0

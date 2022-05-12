@@ -1,27 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XTOWN.SampleLibrary;
 
 public class ColorChange : MonoBehaviour
 {
-    public enum MyColors
-    {
-        Pink, Yellow, Violet
-    }
-
-    public MyColors mycol = MyColors.Pink;
-    public BoxScript boxScript;
+    
+    public Class1 myDllClass;
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("my color:" + mycol);
+        myDllClass = GetComponent<Class1>();
+        myDllClass.CallPublic();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            boxScript.ScaleDouble();
+            myDllClass.CallPublic();
         }
     }
 }
