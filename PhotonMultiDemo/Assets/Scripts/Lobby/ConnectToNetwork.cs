@@ -13,7 +13,12 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class ConnectToNetwork : MonoBehaviourPunCallbacks
 {
 
+    const string SCENE_NAME_KEY = "SceneName";
+    const string DefaultSceneName = "SampleScene";
+
+
     public static ConnectToNetwork Instance = null;
+
 
     private void Awake()
     {
@@ -33,17 +38,13 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
     private void Start()
     {
         UIManager.UI.ShowSceneUI<ConnectionUIScript>("ConnectionUI");
-        Debug.Log("Connecting to Photon...", this);
+        Debug.Log("<<<< WELCOME : NETWORK HW BUILD >>>>>", this);
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.NickName = "Player" + Random.Range(1,100);
         PhotonNetwork.GameVersion = "1.0.0";
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log($"Connected to Master");
-    }
 
     public override void OnDisconnected(DisconnectCause cause)
     {
@@ -74,5 +75,26 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
         }
     }
 
-    
+    public void LoadFirstRoom()
+    {
+        // must bein lobby to execute
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.CustomRoomPropertiesForLobby = new string[] { SCENE_NAME_KEY };
+        roomOptions.CustomRoomProperties = GetFilter(SCENE_NAME_KEY, DefaultSceneName);
+        Debug.Log($"JoinRoomTeleport/ do we have correct room options? ({roomOptions.CustomRoomProperties.ToString()})");
+
+        PlayerManager.Instance.SceneNameToLoad = DefaultSceneName;
+
+        PhotonNetwork.JoinRandomOrCreateRoom(
+            expectedCustomRoomProperties: GetFilter(SCENE_NAME_KEY, DefaultSceneName),
+            roomOptions: roomOptions
+        );
+    }
+
+    public Hashtable GetFilter(string key, object value)
+    {
+        Hashtable ht = new Hashtable();
+        ht.Add(key, value);
+        return ht;
+    }
 }

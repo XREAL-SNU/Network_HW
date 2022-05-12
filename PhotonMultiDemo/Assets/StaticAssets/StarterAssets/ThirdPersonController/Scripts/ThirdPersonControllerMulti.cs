@@ -64,10 +64,6 @@ namespace StarterAssets
 			}
 		}
 
-		private void OnDisable()
-        {
-			//Destroy(this.gameObject);
-        }
 
     }
 }

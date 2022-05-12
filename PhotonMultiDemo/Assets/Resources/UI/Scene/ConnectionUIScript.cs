@@ -11,7 +11,6 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class ConnectionUIScript : UIScene
 {
 
-    bool syncScenes = true;
 
     void Start()
     {
@@ -34,8 +33,9 @@ public class ConnectionUIScript : UIScene
     public void OnClick_JoinRandom(PointerEventData data)
     {
         Debug.Log("OnClick_JoinRandom");
-
-        PhotonNetwork.JoinRandomOrCreateRoom();
         UIManager.UI.CloseSceneUI();
+        UIManager.UI.ShowPopupUI<EmoticonUI>();
     }
+
+
 }
