@@ -60,5 +60,4 @@ public class ShowHeart : MonoBehaviourPun, IPunObservable
             this.show = (bool)stream.ReceiveNext();
         }
     }
-
 }

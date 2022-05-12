@@ -9,6 +9,7 @@ public class HeartTransformView : MonoBehaviourPun, IPunObservable
     private Vector3 m_Direction;
     private Vector3 m_NetworkPosition;
     private Vector3 m_StoredPosition;
+    [SerializeField]
     private bool isDestroyed = false;
 
     [SerializeField]
@@ -58,15 +59,18 @@ public class HeartTransformView : MonoBehaviourPun, IPunObservable
     {
         if (!isDestroyed)
         {
+            Debug.Log("Heart destroyed");
+
             isDestroyed = true;
             yield return new WaitForEndOfFrame();
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, 0.5f);
         }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         var tr = transform;
+
         // Write
         if (stream.IsWriting)
         {
@@ -89,9 +93,11 @@ public class HeartTransformView : MonoBehaviourPun, IPunObservable
                     stream.SendNext(this.isDestroyed);
                 }
             }
+            Debug.Log($"W: destroyed? {isDestroyed}");
 
             if (isDestroyed)
             {
+               
                 Destroy(this.gameObject); //isDestroyed가 true로 전송되는 순간 게임 오브젝트를 파괴하고 끝
             }
         }
