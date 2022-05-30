@@ -19,8 +19,8 @@ public class LoaderBehaviour : MonoBehaviour
 		// component
 		gameObject.AddComponent(type);
 
-		
-		
+
+
 	}
 
 	void OnAssemblyLoadFailed(string url)
